@@ -167,7 +167,7 @@
                                 <td><?php echo $registroObjeto->DescDepartamento; ?></td>
                                 <td><?php echo ($registroObjeto->FechaBaja != null ? $registroObjeto->FechaBaja : '_'); ?></td>
                                 <td><?php echo $registroObjeto->VolumenNegocio; ?></td>
-                                <td><a href="MtoDepartamentoEditar.php"><img id="editar" style="width: 30px" src="../webroot/media/icons/icons8-editar-48.png" alt="editar"/></a></td>
+                                <td><a href="MtoDepartamentoEditar.php?codDepartamento=<?php echo $registroObjeto->CodDepartamento;?>"><img id="editar" style="width: 30px" src="../webroot/media/icons/icons8-editar-48.png" alt="editar"/></a></td>
                              
                             </tr>
                             <?php

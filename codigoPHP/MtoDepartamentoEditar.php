@@ -53,60 +53,65 @@
         /* definir un array para alamcenar errores del codeDep,description y salary */
         $aErrores = [
             "description" => null,
-            "salary" => null
+            "volumenNegocio" => null
         ];
 
         /* Array de respuestas inicializado a null */
         $aRespuestas = [
             "description" => null,
-            "salary" => null
+            "volumenNegocio" => null
         ];
-
         if (isset($_REQUEST['cancelbtn'])) {
-           header("Location:MtoDepartamentos.php");
-            
+            header("Location:MtoDepartamentos.php");
+        }
+
+        try {
+            /* usar el ficherod de configuracion */
+            $miDB = new PDO(HOST, USER, PASSWORD);
+
+            /* Preparamos las excepciones */
+            $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            /* Consulta preparada para buscar  */
+            $sql = "SELECT * from Departamento where CodDepartamento=:codDepartamento";
+            $resultadoConsulta = $miDB->prepare($sql);
+
+            /* usar el bindparam para asegnar el codigo para sacar sus datos */
+            $resultadoConsulta->bindParam(":codDepartamento", $_GET['codDepartamento']);
+            /*ejecutar la consulta */
+            $resultadoConsulta->execute();
+
+            $registro = $resultadoConsulta->fetchObject();
+
+            /*meter los datos del departamento en array aRespuestas para usar lo despues*/
+            $aRespuestas = [
+                "codDepartamento" => $registro->CodDepartamento,
+                "description" => $registro->DescDepartamento,
+                "fechaBaja" => $registro->FechaBaja,
+                "volumenNegocio" => $registro->VolumenNegocio,
+            ];
+        } catch (PDOException $exception) {
+            /* Si hay algun error el try muestra el error del codigo */
+            echo '<span> Codigo del Error :' . $exception->getCode() . '</span> <br>';
+
+            /* Muestramos su mensage de error */
+            echo '<span> Error :' . $exception->getMessage() . '</span> <br>';
+        } finally {
+            /*Cerramos the connection*/
+            unset($miDB);
         }
 
 
-        /* comprobar si ha pulsado el button enviar */
+
+        /* comprobar si ha pulsado el button editar */
         if (isset($_REQUEST['submitbtn'])) {
             //Para cada campo del formulario: Validamos la entrada y actuar en consecuencia
             //Validar entrada
-      
-
             //Comprobar si el campo description  esta rellenado 
             $aErrores["description"] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['description'], 1000, 1, OBLIGATORIO);
 
-            //Comprobar si el campo salary  esta rellenado 
-            $aErrores["salary"] = validacionFormularios::comprobarFloat($_REQUEST['salary'], 10000, 1, OBLIGATORIO);
-
-            if (!$aErrores["codeDep"]) {
-                /* comprobamos si el codigo existe en la base de datos */
-                try {
-                    /* Establecemos la connection con pdo en global */
-                    $miDB = new PDO(HOST, USER, PASSWORD);
-
-                    /* configurar las excepcion */
-                    $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                    $sql = "SELECT CodDepartamento from Departamento where CodDepartamento='" . $_REQUEST['codeDep'] . "'";
-                    $resultadoConsulta = $miDB->query($sql);
-
-                    /* Si existe mostramos el error que esta */
-                    if ($resultadoConsulta->rowCount() > 0) {
-                        $aErrores['codeDep'] = "Ya existe ese código";
-                    }
-                } catch (PDOException $exception) {
-                    /* Si hay algun error el try muestra el error del codigo */
-                    echo '<span> Codigo del Error :' . $exception->getCode() . '</span> <br>';
-
-                    /* Muestramos su mensage de error */
-                    echo '<span> Error :' . $exception->getMessage() . '</span> <br>';
-                } finally {
-                    /* Ceramos la connection */
-                    unset($miDB);
-                }
-            }
+            //Comprobar si el campo volumenNegocio  esta rellenado 
+            $aErrores["volumenNegocio"] = validacionFormularios::comprobarFloat($_REQUEST['volumenNegocio'], 10000, 1, OBLIGATORIO);
 
             //recorrer el array de errores
             foreach ($aErrores as $nombreCampo => $value) {
@@ -121,40 +126,77 @@
             //El formulario no se ha rellenado nunca
             $entradaOK = false;
         }
+        if ($entradaOK) {
+            //Tratamiento del formulario - Tratamiento de datos OK
+            /* Cambiamos los datos en la base de datos */
+
+            try {
+                /* usar el fichero  de configuracion para conectarnos con la base de datos */
+                $miDB = new PDO(HOST, USER, PASSWORD);
+
+                /* Preparamos las excepciones */
+                $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                /* Editar la tabla departamento con los parametros  */
+                $sql = "UPDATE Departamento SET DescDepartamento=:DescDepartamento, VolumenNegocio=:VolumenNegocio WHERE CodDepartamento=:CodDepartamento";
+
+                /*Preparamos  la consulta*/
+                $consulta = $miDB->prepare($sql);
+
+                /* usamos bindParam */
+                $consulta->bindParam(":CodDepartamento", $aRespuestas['codDepartamento']);
+                $consulta->bindParam(":DescDepartamento", $_REQUEST['description']);
+                $consulta->bindParam(":VolumenNegocio", $_REQUEST['volumenNegocio']);
+
+                //Ejecución de la consulta
+                $consulta->execute();
+                echo '';
+                header("Location:MtoDepartamentos.php");
+            } catch (PDOException $exception) {
+                /* Si hay algun error el try muestra el error del codigo */
+                echo '<span> Codigo del Error :' . $exception->getCode() . '</span> <br>';
+
+                /* Muestramos su mensage de error */
+                echo '<span> Error :' . $exception->getMessage() . '</span> <br>';
+            } finally {
+                /*cerramos la connection*/
+                unset($miDB);
+            }
+        }
         ?>
-  <h2>Formulario de editar de departamentos por descripción </h2>
-            <div>
-                <table id="t1">
-                    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
-                        <tr>
-                            <td><label>Codigo de Departamento   :</label></td>
-                            <td><input type="text"  name="codeDep" value="<?php echo (isset($_REQUEST['codeDep']) ? $_REQUEST['codeDep'] : null); ?>"/></td>
-                            <!--<td><span><?php echo ($aErrores["codeDep"] != null ? $aErrores['codeDep'] : null); ?></span></td>-->
-                        </tr>
+        <h2>Formulario de editar  departamento </h2>
+        <div>
+            <table id="t1">
+                <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                    <tr>
+                        <td><label>Codigo de Departamento  :</label></td>
+                        <td><input type="text" disabled name="codDepartamento" value="<?php echo (isset($aRespuestas['codDepartamento']) ? $aRespuestas['codDepartamento'] : null); ?>"/></td>
+                        <td></td>
+                    </tr>
 
-                        <tr>
-                            <td><label>Descripción   :</label></td>
-                            <td><input type="text"  name="description" value="<?php echo (isset($_REQUEST['description']) ? $_REQUEST['description'] : null); ?>"/></td>
-                            <td><span><?php echo ($aErrores["description"] != null ? $aErrores['description'] : null); ?></span></td>
-                        </tr>
-                        <tr>
-                            <td><label>Fecha de Baja   :</label></td>
-                            <td><input type="text"  name="dateDown" value="<?php echo (isset($_REQUEST['dateDown']) ? $_REQUEST['dateDown'] : null); ?>"/></td>
-                           <!-- <td><span><?php echo ($aErrores["dateDown"] != null ? $aErrores['dateDown'] : null); ?></span></td>-->
-                        </tr>
-                        <tr>
-                            <td><label>Volumen de Negocio  :</label></td>
-                            <td><input type="text"  name="salary" value="<?php echo (isset($_REQUEST['salary']) ? $_REQUEST['salary'] : null); ?>"/></td>
-                            <td><span><?php echo ($aErrores["salary"] != null ? $aErrores['salary'] : null); ?></span></td>
-                        </tr>
-                        <tr> 
-                            <td><input type="submit" class="w3-btn w3-teal" name="submitbtn" value="Aceptar"/></td>
-                            <td><input type="submit" class="w3-btn w3-red" name="cancelbtn" value="Cancelar"/></td>
-                        </tr>
-                    </form>
-                </table>
+                    <tr>
+                        <td><label>Descripción   :</label></td>
+                        <td><input type="text"  name="description" value="<?php echo (isset($aRespuestas['description']) ? $aRespuestas['description'] : null); ?>"/></td>
+                        <td><span><?php echo ($aErrores["description"] != null ? $aErrores['description'] : null); ?></span></td>
+                    </tr>
+                    <tr>
+                        <td><label>Fecha de Baja   :</label></td>
+                        <td><input type="text" disabled  name="fechaBaja" value="<?php echo (isset($aRespuestas['fechaBaja']) ? $aRespuestas['fechaBaja'] : "-"); ?>"/></td>
+                        <td></span></td>
+                    </tr>
+                    <tr>
+                        <td><label>Volumen de Negocio  :</label></td>
+                        <td><input type="text"  name="volumenNegocio" value="<?php echo (isset($aRespuestas['volumenNegocio']) ? $aRespuestas['volumenNegocio'] : null); ?>"/></td>
+                        <td><span><?php echo ($aErrores["volumenNegocio"] != null ? $aErrores['volumenNegocio'] : null); ?></span></td>
+                    </tr>
+                    <tr> 
+                        <td><input type="submit" class="w3-btn w3-green" name="submitbtn" value="Aceptar"/></td>
+                        <td><input type="submit" class="w3-btn w3-teal" name="cancelbtn" value="Cancelar"/></td>
+                    </tr>
+                </form>
+            </table>
 
-            </div>
+        </div>
 
     </body>
 </html>
