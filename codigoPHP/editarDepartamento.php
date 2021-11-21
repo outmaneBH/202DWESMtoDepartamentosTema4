@@ -36,6 +36,9 @@
          * Fecha: 18/11/2021
          * description: Page to update Departamento
          */
+         if (isset($_REQUEST['cancelbtn'])) {
+            header("Location:MtoDepartamentos.php");
+        }
         /* usar la libreria de validacion */
         require_once '../core/210322ValidacionFormularios.php';
 
@@ -61,9 +64,7 @@
             "description" => null,
             "volumenNegocio" => null
         ];
-        if (isset($_REQUEST['cancelbtn'])) {
-            header("Location:MtoDepartamentos.php");
-        }
+       
 
         try {
             /* usar el ficherod de configuracion */
