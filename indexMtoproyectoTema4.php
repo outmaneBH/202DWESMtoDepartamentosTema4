@@ -8,7 +8,12 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="icon" href="../webroot/media/img/fav.png" type="image/ico" sizes="16x16">
+       
         <style>
+            p{
+                font-weight: bold;
+            }
+      
             #hre{
                 height: 100px;
                 width: 250px;
@@ -23,7 +28,6 @@
         <div class="w3-container w3-red">
             <h3>Mantenimiento De Departamentos Tema4</h3>
         </div>
-
 
 
         <div class="w3-container" style="height: 600px;position: relative;left: 40%;top: 100px;" >

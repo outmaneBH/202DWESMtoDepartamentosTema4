@@ -113,7 +113,7 @@
             <fieldset>
                 <div class="w3-row">
                     <div class="w3-col s2 "><strong>Añadir departamento:</strong><br>
-                        <a href="añadirDepartamento" type="submit"><input class="w3-bar-item" type="image" src="../webroot/media/icons/icons8-ajouter-une-propriété-48.png" alt="Submit" width="38" height="38" name="anadirbtn"></a>  
+                        <a href="añadirDepartamento.php" type="submit"><input class="w3-bar-item" type="image" src="../webroot/media/icons/icons8-ajouter-une-propriété-48.png" alt="Submit" width="38" height="38" name="anadirbtn"></a>  
                     </div>
                     <div class="w3-col s8 w3-center">
                         <div class="w3-bar">
