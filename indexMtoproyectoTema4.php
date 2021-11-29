@@ -8,12 +8,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="icon" href="../webroot/media/img/fav.png" type="image/ico" sizes="16x16">
-       
         <style>
-            p{
-                font-weight: bold;
-            }
-      
             #hre{
                 height: 100px;
                 width: 250px;
@@ -30,6 +25,7 @@
         </div>
 
 
+
         <div class="w3-container" style="height: 600px;position: relative;left: 40%;top: 100px;" >
             <a href="codigoPHP/MtoDepartamentos.php"><input id="hre" type="button" value="Mantenimiento de Aplicación" /></a>
         </div>
@@ -41,7 +37,7 @@
                 <!-- Section: Social media -->
                 <section class="mb-3">
                     <!-- Github -->
-                    <a class="btn btn-outline-light btn-floating m-1"  href="https://github.com/outmaneBH/202DWESproyectoTema4" target="_blank"  role="button">
+                    <a class="btn btn-outline-light btn-floating m-1"  href="https://github.com/outmaneBH/202DWESMtoDepartamentosTema4" target="_blank"  role="button">
                         <img id="git" style="width: 30px" src="webroot/media/icons/git.png" alt="github"/>  
                     </a>
                 </section>

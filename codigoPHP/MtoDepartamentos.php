@@ -117,7 +117,7 @@
                     </div>
                     <div class="w3-col s8 w3-center">
                         <div class="w3-bar">
-                            <p>Tables</p>
+                            <p>Tables 1&1</p>
                             <a href="../scriptDB/CreaDB202DWESProyectoTema4-1&1.php" ><button class="w3-bar-item w3-button w3-indigo" style="width:33.3%">Create</button></a>
                             <a href="../scriptDB/CargaInicialDB202DWESProyectoTema4-1&1.php" ><button class="w3-bar-item w3-button w3-cyan" style="width:33.3%">Insert </button></a>
                             <a href="../scriptDB/BorraDB202DWESProyectoTema4-1&1.php" ><button class="w3-bar-item w3-button w3-brown" style="width:33.3%">Delete </button></a>
@@ -232,7 +232,7 @@
             <!-- Copyright -->
             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
                 Copyrights © 2021 
-                <a class="text-white"   href="https://github.com/outmaneBH/202DWESproyectoTema4" target="_blank" >OUTMANE BOUHOU</a>
+                <a class="text-white"   href="https://github.com/outmaneBH/202DWESMtoDepartamentosTema4" target="_blank" >OUTMANE BOUHOU</a>
                 . All rights reserved.
             </div>
             <!-- Copyright -->

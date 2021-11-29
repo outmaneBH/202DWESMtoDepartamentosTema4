@@ -1,3 +1,17 @@
+<?php
+/*
+ * author: OUTMANE BOUHOU
+ * Fecha: 09/11/2021
+ * description: 3.Formulario para añadir un departamento a la tabla Departamento con validación de entrada y control de errores.
+ */
+
+
+/* usar la libreria de validacion */
+require_once '../core/210322ValidacionFormularios.php';
+
+/* Llamar al fichero de configuracion de base de datos */
+require_once '../config/confDBPDO.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -38,21 +52,6 @@
     <body>
 
         <?php
-        /*
-         * author: OUTMANE BOUHOU
-         * Fecha: 09/11/2021
-         * description: 3.Formulario para añadir un departamento a la tabla Departamento con validación de entrada y control de errores.
-         */
-        if (isset($_REQUEST['cancelbtn'])) {
-            header("Location:MtoDepartamentos.php");
-        }
-
-        /* usar la libreria de validacion */
-        require_once '../core/210322ValidacionFormularios.php';
-
-        /* Llamar al fichero de configuracion de base de datos */
-        require_once '../config/confDBPDO.php';
-
         /* definir un variable constante obligatorio a 1 */
         define("OBLIGATORIO", 1);
 
@@ -199,9 +198,9 @@
                 </table>
 
             </div>
-    <?php
-}
-?>
+            <?php
+        }
+        ?>
 
 
 

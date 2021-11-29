@@ -1,3 +1,18 @@
+<?php
+/*
+ * author: OUTMANE BOUHOU
+ * Fecha: 18/11/2021
+ * description: Page to update Departamento
+ */
+if (isset($_REQUEST['cancelbtn'])) {
+    header("Location:MtoDepartamentos.php");
+}
+/* usar la libreria de validacion */
+require_once '../core/210322ValidacionFormularios.php';
+
+/* Llamar al fichero de configuracion de base de datos */
+require '../config/confDBPDO.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,20 +46,6 @@
     </head>
     <body>
         <?php
-        /*
-         * author: OUTMANE BOUHOU
-         * Fecha: 18/11/2021
-         * description: Page to update Departamento
-         */
-         if (isset($_REQUEST['cancelbtn'])) {
-            header("Location:MtoDepartamentos.php");
-        }
-        /* usar la libreria de validacion */
-        require_once '../core/210322ValidacionFormularios.php';
-
-        /* Llamar al fichero de configuracion de base de datos */
-        require '../config/confDBPDO.php';
-
         /* definir un variable constante obligatorio a 1 */
         define("OBLIGATORIO", 1);
         /* definir un variable constante opcional a 0 */
@@ -64,7 +65,7 @@
             "description" => null,
             "volumenNegocio" => null
         ];
-       
+
 
         try {
             /* usar el ficherod de configuracion */
@@ -79,12 +80,12 @@
 
             /* usar el bindparam para asegnar el codigo para sacar sus datos */
             $resultadoConsulta->bindParam(":codDepartamento", $_GET['codDepartamento']);
-            /*ejecutar la consulta */
+            /* ejecutar la consulta */
             $resultadoConsulta->execute();
 
             $registro = $resultadoConsulta->fetchObject();
 
-            /*meter los datos del departamento en array aRespuestas para usar lo despues*/
+            /* meter los datos del departamento en array aRespuestas para usar lo despues */
             $aRespuestas = [
                 "codDepartamento" => $registro->CodDepartamento,
                 "description" => $registro->DescDepartamento,
@@ -98,7 +99,7 @@
             /* Muestramos su mensage de error */
             echo '<span> Error :' . $exception->getMessage() . '</span> <br>';
         } finally {
-            /*Cerramos the connection*/
+            /* Cerramos the connection */
             unset($miDB);
         }
 
@@ -141,12 +142,12 @@
                 /* Editar la tabla departamento con los parametros  */
                 $sql = "DELETE FROM Departamento  WHERE CodDepartamento=:CodDepartamento";
 
-                /*Preparamos  la consulta*/
+                /* Preparamos  la consulta */
                 $consulta = $miDB->prepare($sql);
 
                 /* usamos bindParam */
                 $consulta->bindParam(":CodDepartamento", $aRespuestas['codDepartamento']);
-            
+
 
                 //Ejecución de la consulta
                 $consulta->execute();
@@ -159,7 +160,7 @@
                 /* Muestramos su mensage de error */
                 echo '<span> Error :' . $exception->getMessage() . '</span> <br>';
             } finally {
-                /*cerramos la connection*/
+                /* cerramos la connection */
                 unset($miDB);
             }
         }
