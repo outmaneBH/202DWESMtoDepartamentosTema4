@@ -1,8 +1,28 @@
+<?php
+/*
+ * author: OUTMANE BOUHOU
+ * Fecha: 09/11/2021
+ * description: 3.Formulario para añadir un departamento a la tabla Departamento con validación de entrada y control de errores.
+ */
+
+if (isset($_REQUEST['cancelbtn'])) {
+    header("Location:MtoDepartamentos.php");
+}
+
+/* usar la libreria de validacion */
+require_once '../core/210322ValidacionFormularios.php';
+
+/* Llamar al fichero de configuracion de base de datos */
+require_once '../config/confDBPDO.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>OB-Añadir Departamento</title>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+     
         <style>
             #t1{
                 position: relative;
@@ -38,21 +58,6 @@
     <body>
 
         <?php
-        /*
-         * author: OUTMANE BOUHOU
-         * Fecha: 09/11/2021
-         * description: 3.Formulario para añadir un departamento a la tabla Departamento con validación de entrada y control de errores.
-         */
-        if (isset($_REQUEST['cancelbtn'])) {
-            header("Location:MtoDepartamentos.php");
-        }
-
-        /* usar la libreria de validacion */
-        require_once '../core/210322ValidacionFormularios.php';
-
-        /* Llamar al fichero de configuracion de base de datos */
-        require_once '../config/confDBPDO.php';
-
         /* definir un variable constante obligatorio a 1 */
         define("OBLIGATORIO", 1);
 
@@ -199,10 +204,29 @@
                 </table>
 
             </div>
-    <?php
-}
-?>
-
+            <?php
+        }
+        ?>
+<footer style="position: fixed;bottom: 0;width: 100%" class="bg-dark text-center text-white">
+                <!-- Grid container -->
+                <div class="container p-3 pb-0">
+                    <!-- Section: Social media -->
+                    <section class="mb-3">
+                        <!-- Github -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/outmaneBH/202DWESMtoDepartamentosTema4" target="_blank" role="button">
+                            <img id="git" style="width: 30px;height:30px; " src="../webroot/media/icons/git.png" alt="github"/>  
+                        </a>
+                    </section>
+                </div>
+                <!-- Grid container -->
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    Copyrights © 2021 
+                    <a class="text-white" href="../index.html">OUTMANE BOUHOU</a>
+                    . All rights reserved.
+                </div>
+                <!-- Copyright -->
+            </footer>
 
 
     </body>

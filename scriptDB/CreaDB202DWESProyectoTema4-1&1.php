@@ -26,6 +26,7 @@ try {
     $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = <<<OB
+            USE dbs4868775;
             CREATE TABLE IF NOT EXISTS Departamento(
                  CodDepartamento varchar(3) PRIMARY KEY,
                  DescDepartamento varchar(255) NOT NULL,
@@ -33,7 +34,7 @@ try {
                  VolumenNegocio float NULL
                 )engine = innodb;
             OB;
-    $miDB = exec($sql);
+    $miDB -> exec($sql);
     echo '                  <div class="w3-panel w3-blue">
                             <h3>Information!</h3>
                             <p>La tabla ha insertado bien.</p>

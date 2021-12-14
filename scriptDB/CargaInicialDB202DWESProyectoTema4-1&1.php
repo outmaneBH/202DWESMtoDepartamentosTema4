@@ -27,12 +27,13 @@ try {
     $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = <<<OB
-           insert into Departamento(CodDepartamento,DescDepartamento,FechaBaja,VolumenNegocio) values 
-('FOL', 'departamento FOL', null, 102.4),
-('DAW', 'departamento DAW', null, 1000.3),
-('DIW', 'departamento DIW', null, 289.3)
+            USE dbs4868775;
+            insert into Departamento(CodDepartamento,DescDepartamento,FechaBaja,VolumenNegocio) values 
+            ('FOL', 'departamento FOL', null, 102.4),
+            ('DAW', 'departamento DAW', null, 1000.3),
+            ('DIW', 'departamento DIW', null, 289.3);
             OB;
-    $miDB = exec($sql);
+    $miDB -> exec($sql);
     echo '                  <div class="w3-panel w3-blue">
                             <h3>Information!</h3>
                             <p>Se insertado bien.</p>
