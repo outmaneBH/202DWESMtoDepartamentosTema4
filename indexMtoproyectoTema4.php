@@ -40,6 +40,7 @@
                     <!-- Github -->
                     <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/outmaneBH/202DWESMtoDepartamentosTema4" target="_blank" role="button">
                         <img id="git" style="width: 30px;height:30px; " src="webroot/media/icons/git.png" alt="github"/>  
+
                     </a>
                 </section>
             </div>
