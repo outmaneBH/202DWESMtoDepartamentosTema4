@@ -1,9 +1,26 @@
+<?php
+/*
+ * author: OUTMANE BOUHOU
+ * Fecha: 18/11/2021
+ * description: Page to update Departamento
+ */
+if (isset($_REQUEST['cancelbtn'])) {
+    header("Location:MtoDepartamentos.php");
+}
+/* usar la libreria de validacion */
+require_once '../core/210322ValidacionFormularios.php';
+
+/* Llamar al fichero de configuracion de base de datos */
+require '../config/confDBPDO.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <title>OB - Borrar Departamento</title>
         <style>
@@ -31,20 +48,6 @@
     </head>
     <body>
         <?php
-        /*
-         * author: OUTMANE BOUHOU
-         * Fecha: 18/11/2021
-         * description: Page to update Departamento
-         */
-         if (isset($_REQUEST['cancelbtn'])) {
-            header("Location:MtoDepartamentos.php");
-        }
-        /* usar la libreria de validacion */
-        require_once '../core/210322ValidacionFormularios.php';
-
-        /* Llamar al fichero de configuracion de base de datos */
-        require '../config/confDBPDO.php';
-
         /* definir un variable constante obligatorio a 1 */
         define("OBLIGATORIO", 1);
         /* definir un variable constante opcional a 0 */
@@ -64,7 +67,7 @@
             "description" => null,
             "volumenNegocio" => null
         ];
-       
+
 
         try {
             /* usar el ficherod de configuracion */
@@ -79,12 +82,12 @@
 
             /* usar el bindparam para asegnar el codigo para sacar sus datos */
             $resultadoConsulta->bindParam(":codDepartamento", $_GET['codDepartamento']);
-            /*ejecutar la consulta */
+            /* ejecutar la consulta */
             $resultadoConsulta->execute();
 
             $registro = $resultadoConsulta->fetchObject();
 
-            /*meter los datos del departamento en array aRespuestas para usar lo despues*/
+            /* meter los datos del departamento en array aRespuestas para usar lo despues */
             $aRespuestas = [
                 "codDepartamento" => $registro->CodDepartamento,
                 "description" => $registro->DescDepartamento,
@@ -98,7 +101,7 @@
             /* Muestramos su mensage de error */
             echo '<span> Error :' . $exception->getMessage() . '</span> <br>';
         } finally {
-            /*Cerramos the connection*/
+            /* Cerramos the connection */
             unset($miDB);
         }
 
@@ -108,12 +111,12 @@
         if (isset($_REQUEST['submitbtn'])) {
             //Para cada campo del formulario: Validamos la entrada y actuar en consecuencia
             //Validar entrada
-            //Comprobar si el campo description  esta rellenado 
+           /** //Comprobar si el campo description  esta rellenado 
             $aErrores["description"] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['description'], 1000, 1, OBLIGATORIO);
 
             //Comprobar si el campo volumenNegocio  esta rellenado 
             $aErrores["volumenNegocio"] = validacionFormularios::comprobarFloat($_REQUEST['volumenNegocio'], 10000, 1, OBLIGATORIO);
-
+*/
             //recorrer el array de errores
             foreach ($aErrores as $nombreCampo => $value) {
                 //Comprobar si el campo ha sido rellenado
@@ -141,12 +144,12 @@
                 /* Editar la tabla departamento con los parametros  */
                 $sql = "DELETE FROM Departamento  WHERE CodDepartamento=:CodDepartamento";
 
-                /*Preparamos  la consulta*/
+                /* Preparamos  la consulta */
                 $consulta = $miDB->prepare($sql);
 
                 /* usamos bindParam */
                 $consulta->bindParam(":CodDepartamento", $aRespuestas['codDepartamento']);
-            
+
 
                 //Ejecución de la consulta
                 $consulta->execute();
@@ -159,7 +162,7 @@
                 /* Muestramos su mensage de error */
                 echo '<span> Error :' . $exception->getMessage() . '</span> <br>';
             } finally {
-                /*cerramos la connection*/
+                /* cerramos la connection */
                 unset($miDB);
             }
         }
@@ -197,7 +200,26 @@
             </table>
 
         </div>
-
+        <footer style="position: fixed;bottom: 0;width: 100%" class="bg-dark text-center text-white">
+            <!-- Grid container -->
+            <div class="container p-3 pb-0">
+                <!-- Section: Social media -->
+                <section class="mb-3">
+                    <!-- Github -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/outmaneBH/202DWESMtoDepartamentosTema4" target="_blank" role="button">
+                        <img id="git" style="width: 30px;height:30px; " src="../webroot/media/icons/git.png" alt="github"/>  
+                    </a>
+                </section>
+            </div>
+            <!-- Grid container -->
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                Copyrights © 2021 
+                <a class="text-white" href="../index.html">OUTMANE BOUHOU</a>
+                . All rights reserved.
+            </div>
+            <!-- Copyright -->
+        </footer>
     </body>
 </html>
 

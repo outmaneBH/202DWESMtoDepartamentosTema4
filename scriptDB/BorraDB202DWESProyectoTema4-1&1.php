@@ -22,9 +22,10 @@
             $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $sql = <<<OB
-           drop table if exists Departamento ;
+                 USE dbs4868775;
+                 DROP TABLE IF EXISTS Departamento ;
             OB;
-            $miDB = exec($sql);
+            $miDB -> exec($sql);
             echo '                  <div class="w3-panel w3-blue">
                             <h3>Information!</h3>
                             <p>Se ha borrado la tabla</p>

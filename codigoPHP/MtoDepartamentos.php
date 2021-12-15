@@ -33,7 +33,7 @@
                 text-decoration: underline;
             }
             .des{
-                height: 120px;
+                height: 150px;
             }
             #volver{
                 position: relative;
@@ -113,14 +113,14 @@
             <fieldset>
                 <div class="w3-row">
                     <div class="w3-col s2 "><strong>Añadir departamento:</strong><br>
-                        <a href="añadirDepartamento" type="submit"><input class="w3-bar-item" type="image" src="../webroot/media/icons/icons8-ajouter-une-propriété-48.png" alt="Submit" width="38" height="38" name="anadirbtn"></a>  
+                        <a href="anadirDepartamento.php" type="submit"><input class="w3-bar-item" type="image" src="../webroot/media/icons/add.png" alt="Submit" width="38" height="38" name="anadirbtn"></a>  
                     </div>
                     <div class="w3-col s8 w3-center">
                         <div class="w3-bar">
-                            <p>Tables</p>
+                          <!--  <p>Tables 1&1</p>
                             <a href="../scriptDB/CreaDB202DWESProyectoTema4-1&1.php" ><button class="w3-bar-item w3-button w3-indigo" style="width:33.3%">Create</button></a>
                             <a href="../scriptDB/CargaInicialDB202DWESProyectoTema4-1&1.php" ><button class="w3-bar-item w3-button w3-cyan" style="width:33.3%">Insert </button></a>
-                            <a href="../scriptDB/BorraDB202DWESProyectoTema4-1&1.php" ><button class="w3-bar-item w3-button w3-brown" style="width:33.3%">Delete </button></a>
+                            <a href="../scriptDB/BorraDB202DWESProyectoTema4-1&1.php" ><button class="w3-bar-item w3-button w3-brown" style="width:33.3%">Delete </button></a>-->
                         </div>
                     </div>
                     <div class="w3-col s2 w3-center">
@@ -214,28 +214,26 @@
         </div>
         <a id="volver" href="../indexMtoproyectoTema4.php" class="w3-button w3-black">volver</a>
         <br>
-        <div class="des"></div>
-        <footer class="bg-dark text-center text-white">
-            <!-- Grid container -->
-            <div class="container p-3 pb-0">
-                <!-- Section: Social media -->
-                <section class="mb-3">
-                    <!-- Github -->
-                    <a class="btn btn-outline-light btn-floating m-1"  href="https://github.com/outmaneBH/202DWESproyectoTema4" target="_blank"  role="button">
-                        <img id="git" style="width: 30px" src="../webroot/media/icons/git.png" alt="github"/>  
-                    </a>
-                </section>
-
-            </div>
-            <!-- Grid container -->
-
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                Copyrights © 2021 
-                <a class="text-white"   href="https://github.com/outmaneBH/202DWESproyectoTema4" target="_blank" >OUTMANE BOUHOU</a>
-                . All rights reserved.
-            </div>
-            <!-- Copyright -->
-        </footer>
+        <div style="margin-bottom: 10px;"  class="des"></div>
+        <footer style="position: fixed;bottom: 0;width: 100%" class="bg-dark text-center text-white">
+                <!-- Grid container -->
+                <div class="container p-3 pb-0">
+                    <!-- Section: Social media -->
+                    <section class="mb-3">
+                        <!-- Github -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/outmaneBH/202DWESMtoDepartamentosTema4" target="_blank" role="button">
+                            <img id="git" style="width: 30px;height:30px; " src="../webroot/media/icons/git.png" alt="github"/>  
+                        </a>
+                    </section>
+                </div>
+                <!-- Grid container -->
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    Copyrights © 2021 
+                    <a class="text-white" href="../index.html">OUTMANE BOUHOU</a>
+                    . All rights reserved.
+                </div>
+                <!-- Copyright -->
+            </footer>
     </body>
 </html>
